@@ -1,12 +1,12 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
-import Anthropic from '@anthropic-ai/sdk';
+import Groq from 'groq-sdk';
 import { PrismaService } from '../../prisma/prisma.service';
 
 @Injectable()
 export class CommunicationsService {
-  private readonly anthropic = new Anthropic({
-    apiKey: process.env.ANTHROPIC_API_KEY,
+  private readonly groq = new Groq({
+    apiKey: process.env.GROQ_API_KEY,
   });
 
   constructor(private readonly prisma: PrismaService) {}
@@ -79,8 +79,8 @@ export class CommunicationsService {
       throw new NotFoundException('Communication not found');
     }
 
-    const message = await this.anthropic.messages.create({
-      model: 'claude-haiku-4-5-20251001',
+    const message = await this.groq.chat.completions.create({
+      model: 'llama-3.3-70b-versatile',
       max_tokens: 1024,
       messages: [
         {
@@ -90,7 +90,7 @@ export class CommunicationsService {
       ],
     });
 
-    const summary = message.content[0].type === 'text' ? message.content[0].text : '';
+    const summary = message.choices[0]?.message?.content ?? '';
 
     return { summary };
   }
