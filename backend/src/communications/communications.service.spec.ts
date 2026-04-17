@@ -68,14 +68,22 @@ describe('CommunicationsService', () => {
       await service.findAll({ page: 1, limit: 10, tribunal: 'TJSP' });
 
       const whereArg = mockPrisma.communication.findMany.mock.calls[0][0].where;
-      expect(whereArg.courtAcronym).toEqual({ contains: 'TJSP', mode: 'insensitive' });
+      expect(whereArg.courtAcronym).toEqual({
+        contains: 'TJSP',
+        mode: 'insensitive',
+      });
     });
 
     it('should apply date range filter', async () => {
       mockPrisma.communication.findMany.mockResolvedValue([]);
       mockPrisma.communication.count.mockResolvedValue(0);
 
-      await service.findAll({ page: 1, limit: 10, dataInicio: '2025-01-01', dataFim: '2025-01-31' });
+      await service.findAll({
+        page: 1,
+        limit: 10,
+        dataInicio: '2025-01-01',
+        dataFim: '2025-01-31',
+      });
 
       const whereArg = mockPrisma.communication.findMany.mock.calls[0][0].where;
       expect(whereArg.availableAt).toEqual({
@@ -107,7 +115,10 @@ describe('CommunicationsService', () => {
 
     it('should detect transitou em julgado in content', async () => {
       mockPrisma.communication.findMany.mockResolvedValue([
-        { ...mockCommunication, content: 'A sentença transitou em julgado em 05/01/2025.' },
+        {
+          ...mockCommunication,
+          content: 'A sentença transitou em julgado em 05/01/2025.',
+        },
       ]);
 
       const result = await service.findByProcess('0001234-00.2025.8.26.0100');
@@ -125,7 +136,10 @@ describe('CommunicationsService', () => {
 
     it('should detect transitou em julgado case insensitively', async () => {
       mockPrisma.communication.findMany.mockResolvedValue([
-        { ...mockCommunication, content: 'TRANSITOU EM JULGADO conforme certidão.' },
+        {
+          ...mockCommunication,
+          content: 'TRANSITOU EM JULGADO conforme certidão.',
+        },
       ]);
 
       const result = await service.findByProcess('0001234-00.2025.8.26.0100');
@@ -149,7 +163,9 @@ describe('CommunicationsService', () => {
     it('should throw NotFoundException when communication does not exist', async () => {
       mockPrisma.communication.findUnique.mockResolvedValue(null);
 
-      await expect(service.generateSummary(999)).rejects.toThrow(NotFoundException);
+      await expect(service.generateSummary(999)).rejects.toThrow(
+        NotFoundException,
+      );
     });
   });
 });
