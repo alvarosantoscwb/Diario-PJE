@@ -53,9 +53,15 @@ Acesse em **http://localhost:3000**
 
 ---
 
-## Link de produção
+## Links de produção
 
-> Em breve
+| Serviço | URL |
+|---|---|
+| **Frontend** | https://frontend-juscash.vercel.app |
+| **Backend** | https://desafio-draco-ajss-1304-production-2617.up.railway.app |
+| **Swagger (API Docs)** | https://desafio-draco-ajss-1304-production-2617.up.railway.app/api/docs |
+
+> **Infraestrutura:** Frontend na Vercel, Backend + PostgreSQL no Railway (rede interna privada)
 
 ---
 
@@ -92,7 +98,6 @@ Agendado com `@nestjs/schedule` para executar diariamente às 01:00. Usa `upsert
 - **Cache** — Redis para cachear listagens e evitar queries repetidas ao banco
 - **Refresh token** — Implementar rotação de tokens para melhor segurança
 - **Filtro por tipo de comunicação** — Campo `communicationType` já existe no banco, falta expor no filtro
-- **Deploy automatizado** — Pipeline CI/CD completo com deploy automático em cada push para main
 
 ---
 
