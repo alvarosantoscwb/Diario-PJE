@@ -1,48 +1,16 @@
-import { Injectable, Logger, OnApplicationBootstrap } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { Cron } from '@nestjs/schedule';
 import { PrismaService } from '../../prisma/prisma.service';
 import { PjeService, PjeItem } from '../pje/pje.service';
 
 @Injectable()
-export class CronService implements OnApplicationBootstrap {
+export class CronService {
   private readonly logger = new Logger(CronService.name);
 
   constructor(
     private readonly pjeService: PjeService,
     private readonly prisma: PrismaService,
   ) {}
-
-  async onApplicationBootstrap() {
-    const count = await this.prisma.communication.count();
-    if (count === 0) {
-      this.logger.log('Empty database detected — running initial sync for last 20 days');
-      await this.seedLastDays(20);
-    }
-  }
-
-  async seedLastDays(days: number) {
-    const today = new Date();
-    let total = 0;
-
-    for (let i = 1; i <= days; i++) {
-      const date = new Date(today);
-      date.setDate(date.getDate() - i);
-      const dateStr = date.toISOString().split('T')[0];
-
-      try {
-        const items = await this.pjeService.fetchAll(dateStr, dateStr);
-        for (const item of items) {
-          await this.upsertCommunication(item);
-          total++;
-        }
-        this.logger.log(`Initial sync: ${items.length} records for ${dateStr}`);
-      } catch (err) {
-        this.logger.warn(`Initial sync failed for ${dateStr}: ${err}`);
-      }
-    }
-
-    this.logger.log(`Initial sync complete: ${total} total records`);
-  }
 
   @Cron('0 1 * * *')
   async syncPreviousDay() {
