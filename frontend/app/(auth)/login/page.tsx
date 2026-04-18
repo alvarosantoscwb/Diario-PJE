@@ -63,8 +63,12 @@ export default function LoginPage() {
 			</div>
 
 			{/* Lado direito — formulário */}
-			<div className="flex flex-1 flex-col items-center justify-center gap-4">
-				<div className="w-[460px] rounded-xl border border-gray-300 p-6 flex flex-col gap-2">
+			<div className="flex flex-1 flex-col items-center justify-center gap-4 bg-gray-100 lg:bg-white px-4 py-8">
+				<div className="flex flex-col items-center gap-1 lg:hidden">
+					<Image src="/logoBlue.png" alt="JusCash Logo" width={160} height={24} className="object-contain" priority />
+					<p className="text-sm text-[#6D6D6E]">Antecipe honorários advocatícios com a JusCash</p>
+				</div>
+				<div className="w-full max-w-[460px] rounded-xl border border-gray-300 bg-white p-6 flex flex-col gap-2">
 					<h1 className="text-3xl font-bold text-[#262626]  text-center">
 						Bem-vindo de volta
 					</h1>
