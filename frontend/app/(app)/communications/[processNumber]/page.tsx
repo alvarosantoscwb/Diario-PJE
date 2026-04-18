@@ -112,6 +112,16 @@ function CommunicationDetail({ communication }: { communication: Communication }
   return (
     <>
       <div className="bg-white border border-dashed border-gray-300 rounded-xl p-6">
+        {/* Mobile: botão acima | Desktop: botão à direita */}
+        <div className="flex sm:hidden justify-start mb-3">
+          <button
+            onClick={handleResumirClick}
+            className="flex items-center gap-1.5 text-sm text-[#0D4897] border border-[#0D4897] px-3 py-1 rounded-lg hover:bg-[#0D4897]/5 transition cursor-pointer"
+          >
+            <Sparkles size={13} />
+            Resumir
+          </button>
+        </div>
         <div className="flex items-start gap-4">
           <div className="flex flex-col gap-3 flex-1">
             <div className="flex flex-col gap-0.5">
@@ -141,7 +151,7 @@ function CommunicationDetail({ communication }: { communication: Communication }
 
           <button
             onClick={handleResumirClick}
-            className="flex items-center gap-1.5 text-sm text-[#0D4897] border border-[#0D4897] px-3 py-1 rounded-lg hover:bg-[#0D4897]/5 transition cursor-pointer shrink-0"
+            className="hidden sm:flex items-center gap-1.5 text-sm text-[#0D4897] border border-[#0D4897] px-3 py-1 rounded-lg hover:bg-[#0D4897]/5 transition cursor-pointer shrink-0"
           >
             <Sparkles size={13} />
             Resumir
@@ -215,7 +225,7 @@ export default function ProcessDetailPage() {
         <div className="flex flex-col gap-4">
           {/* Header do processo */}
           <div className="border border-gray-300 p-6 rounded-xl">
-            <div className="flex items-start justify-between gap-4">
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
               <h1 className="text-xl font-bold text-[#262626]">
                 {[
                   details.communications[0]?.processNumberMask || details.processNumber,
@@ -223,26 +233,26 @@ export default function ProcessDetailPage() {
                 ].filter(Boolean).join(' - ')}
               </h1>
               {details.hasTransitadoEmJulgado && (
-                <span className="flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded-full shrink-0" style={{ backgroundColor: '#FEF2EC', color: '#9D231C' }}>
+                <span className="flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded-full self-start shrink-0" style={{ backgroundColor: '#FEF2EC', color: '#9D231C' }}>
                   <AlertCircle size={13} />
                   Transitou em julgado
                 </span>
               )}
             </div>
 
-            <div className="flex flex-wrap items-center gap-4 mt-3 text-sm text-[#262626]">
+            <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-2 sm:gap-4 mt-3 text-sm text-[#262626]">
               {details.courtAcronym && (
                 <span className="flex items-center gap-1.5">
                   <Scale size={13} className="text-[#6D6D6E]" />
                   {details.courtAcronym}
                 </span>
-              )} <span className='text-[#D4D4D4]'>|</span>
+              )}
               {allRecipients && (
                 <span className="flex items-center gap-1.5">
                   <Users size={13} className="text-[#6D6D6E]" />
                   {allRecipients}
                 </span>
-              )} <p className='text-[#D4D4D4]'>|</p>
+              )}
               <span className="flex items-center gap-1.5">
                 <Clock size={13} className="text-gray-400" />
                 {details.communications.length} {details.communications.length === 1 ? 'atualização' : 'atualizações'}
