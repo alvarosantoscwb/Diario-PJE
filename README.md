@@ -1,4 +1,4 @@
-# Desafio JusCash — Diário de Justiça Eletrônico
+# Diário de Justiça Eletrônico
 
 Aplicação fullstack que consome a API pública do **PJE (Diário de Justiça Eletrônico Nacional)**, armazena comunicações processuais em banco de dados e as apresenta em uma interface web com filtros, detalhamento e resumo por IA.
 
@@ -57,9 +57,9 @@ Acesse em **http://localhost:3000**
 
 | Serviço | URL |
 |---|---|
-| **Frontend** | https://frontend-juscash.vercel.app |
-| **Backend** | https://desafio-draco-ajss-1304-production-2617.up.railway.app |
-| **Swagger (API Docs)** | https://desafio-draco-ajss-1304-production-2617.up.railway.app/api/docs |
+| **Frontend** | https://frontend-pje.vercel.app |
+| **Backend** | https://diario-pje-production-2617.up.railway.app | 
+| **Swagger (API Docs)** | https://diario-pje-production-2617.up.railway.app/api/docs |
 
 > **Infraestrutura:** Frontend na Vercel, Backend + PostgreSQL no Railway (rede interna privada)
 
