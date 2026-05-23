@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { PrismaPg } from '@prisma/adapter-pg';
+import * as bcrypt from 'bcrypt';
 import 'dotenv/config';
 
 const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
@@ -173,6 +174,29 @@ async function seedTestProcess() {
   console.log('Test process seeded: 8 communications, includes "transitou em julgado"');
 }
 
+async function seedDemoUser() {
+  const email = 'admin123@email.com';
+  const password = 'senha123';
+
+  const existing = await prisma.user.findUnique({ where: { email } });
+  if (existing) {
+    console.log('Demo user already exists');
+    return;
+  }
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  await prisma.user.create({
+    data: {
+      name: 'Administrador Demo',
+      email,
+      password: hashedPassword,
+    },
+  });
+
+  console.log(`Demo user created: ${email} / ${password}`);
+}
+
 async function main() {
   console.log('Starting seed: fetching last 20 days of communications...');
 
@@ -202,6 +226,7 @@ async function main() {
 
   console.log(`\nSeed complete: ${totalSaved} total communications saved.`);
   await seedTestProcess();
+  await seedDemoUser();
 }
 
 main()

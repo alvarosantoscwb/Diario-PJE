@@ -19,7 +19,7 @@ async function bootstrap() {
   });
 
   const config = new DocumentBuilder()
-    .setTitle('JusCash API')
+    .setTitle('Diário PJE API')
     .setDescription('API para consulta de comunicações do Diário de Justiça Eletrônico')
     .setVersion('1.0')
     .addBearerAuth()

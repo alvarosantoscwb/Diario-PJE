@@ -46,7 +46,7 @@ export default function RegisterPage() {
 				<div className="relative w-full h-full rounded-xl overflow-hidden">
 					<Image
 						src="/image.png"
-						alt="JusCash background"
+						alt="Diário PJE background"
 						className="object-cover"
 						fill
 						sizes="50vw"
@@ -55,14 +55,14 @@ export default function RegisterPage() {
 					<div className="absolute inset-0 flex flex-col items-start justify-start p-8">
 						{/* <Image
 							src="/logo.png"
-							alt="JusCash Logo"
+							alt="Diário PJE Logo"
 							width={199}
 							height={30}
 							className="object-contain"
 							priority
 						/>
 						<p className="mt-3 text-white">
-							Antecipe honorários advocatícios com a JusCash
+							Gestão de comunicações processuais
 						</p> */}
 					</div>
 				</div>
@@ -70,8 +70,8 @@ export default function RegisterPage() {
 
 			<div className="flex flex-1 flex-col items-center justify-center gap-4 bg-gray-100 lg:bg-white px-4 py-8">
 				<div className="flex flex-col items-center gap-1 lg:hidden">
-					<Image src="/logoBlue.png" alt="JusCash Logo" width={160} height={24} className="object-contain" priority />
-					<p className="text-sm text-[#6D6D6E]">Antecipe honorários advocatícios com a JusCash</p>
+					<Image src="/logoBlue.png" alt="Diário PJE Logo" width={160} height={24} className="object-contain" priority />
+					<p className="text-sm text-[#6D6D6E]">Gestão de comunicações processuais</p>
 				</div>
 				<div className="w-full max-w-[460px] rounded-xl border border-gray-300 bg-white p-6 flex flex-col gap-2">
 					<h1 className="text-3xl font-bold text-[#262626] text-center">
@@ -231,7 +231,7 @@ export default function RegisterPage() {
 					</form>
 				</div>
 				<p className="text-xs text-[#6D6D6E] text-center">
-					© 2026 • Juscash Administração de Pagamentos e Recebimentos SA
+					© 2026 • Diário PJE
 				</p>
 			</div>
 		</div>

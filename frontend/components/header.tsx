@@ -56,7 +56,7 @@ export function Header() {
         </button>
         <Image
           src="/logoBlue.png"
-          alt="JusCash Logo"
+          alt="Diário PJE Logo"
           width={124}
           height={19}
           className="object-contain"

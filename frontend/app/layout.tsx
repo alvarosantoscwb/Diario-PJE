@@ -6,7 +6,7 @@ import "./globals.css";
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
-  title: "JusCash",
+  title: "Diário PJE",
   description: "Gestão de comunicações processuais",
 };
 
