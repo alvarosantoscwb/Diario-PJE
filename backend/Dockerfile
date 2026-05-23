@@ -16,6 +16,7 @@ COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/prisma.config.ts ./prisma.config.ts
+COPY --from=builder /app/tsconfig.json ./tsconfig.json
 COPY package*.json ./
 EXPOSE 3001
 CMD ["sh", "-c", "npx prisma db push && (npm run seed || echo 'Seed skipped/failed') && node dist/main.js"]
