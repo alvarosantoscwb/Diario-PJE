@@ -2,9 +2,9 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
-import { ChevronDown, LogOut, PanelRight, Bell } from 'lucide-react';
-import Image from "next/image";
+import { ChevronDown, LogOut, PanelRight, Bell, Sun, Moon } from 'lucide-react';
 import { useSidebar } from '@/components/sidebar-context';
+import { useTheme } from '@/components/theme-script';
 
 function getInitials(): string {
   if (typeof window === 'undefined') return 'US';
@@ -22,7 +22,8 @@ function getInitials(): string {
 export function Header() {
   const router = useRouter();
   const pathname = usePathname();
-  const { toggle } = useSidebar();
+  const { toggle: toggleSidebar } = useSidebar();
+  const { theme, toggle: toggleTheme } = useTheme();
   const isDetailPage = pathname.startsWith('/communications/');
   const [open, setOpen] = useState(false);
   const [initials, setInitials] = useState('US');
@@ -48,42 +49,41 @@ export function Header() {
   }
 
   return (
-    <header className="h-12 bg-white border-b border-gray-200 flex items-center justify-between pl-3 shrink-0">
-
-      <div className="flex items-center">
-        <button onClick={toggle} className="p-2 rounded-lg transition-colors text-gray-700 hover:bg-gray-100 cursor-pointer">
+    <header className="h-12 bg-background border-b border-border flex items-center justify-between pl-3 shrink-0">
+      <div className="flex items-center gap-1">
+        <button onClick={toggleSidebar} className="p-2 rounded-lg transition-colors text-muted-foreground hover:bg-accent cursor-pointer">
           <PanelRight size={16} />
         </button>
-        <Image
-          src="/logoBlue.png"
-          alt="Diário PJE Logo"
-          width={124}
-          height={19}
-          className="object-contain"
-          priority
-        />
+        <span className="text-sm font-semibold text-foreground">Diário PJE</span>
       </div>
       <div className="flex items-center gap-2 pr-3">
+        <button
+          onClick={toggleTheme}
+          className="p-2 rounded-lg text-muted-foreground hover:bg-accent transition cursor-pointer"
+          aria-label="Alternar tema"
+        >
+          {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+        </button>
         {isDetailPage && (
-          <button className="p-2 rounded-lg text-gray-500 hover:bg-gray-100 transition cursor-pointer">
+          <button className="p-2 rounded-lg text-muted-foreground hover:bg-accent transition cursor-pointer">
             <Bell size={16} />
           </button>
         )}
         <div className="relative" ref={ref}>
           <button
             onClick={() => setOpen((v) => !v)}
-            className="flex items-center gap-1.5 text-gray-700 hover:opacity-80 transition cursor-pointer"
+            className="flex items-center gap-1.5 text-muted-foreground hover:opacity-80 transition cursor-pointer"
           >
-            <div className="w-7 h-7 rounded-full bg-[#E5E5E5] flex items-center justify-center text-xs font-semibold text-[#262626]">
+            <div className="w-7 h-7 rounded-full bg-muted flex items-center justify-center text-xs font-semibold text-foreground">
               {initials}
             </div>
             <ChevronDown size={14} />
           </button>
           {open && (
-            <div className="absolute right-0 top-9 bg-white rounded-lg shadow-lg border border-gray-100 py-1 min-w-[140px] z-50">
+            <div className="absolute right-0 top-9 bg-popover rounded-lg shadow-lg border border-border py-1 min-w-[140px] z-50">
               <button
                 onClick={handleLogout}
-                className="w-full flex items-center gap-2 px-4 py-2 text-sm text-red-500 hover:bg-red-50 transition cursor-pointer"
+                className="w-full flex items-center gap-2 px-4 py-2 text-sm text-destructive hover:bg-destructive/10 transition cursor-pointer"
               >
                 <LogOut size={14} />
                 Sair
@@ -92,7 +92,6 @@ export function Header() {
           )}
         </div>
       </div>
-
     </header>
   );
 }

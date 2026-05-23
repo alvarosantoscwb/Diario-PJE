@@ -17,7 +17,7 @@ export function Sidebar() {
   if (!open) return null;
 
   return (
-    <aside className="hidden md:flex w-14 bg-white border-r border-gray-200 flex-col items-center py-4 gap-6 shrink-0">
+    <aside className="hidden md:flex w-14 bg-background border-r border-border flex-col items-center py-4 gap-6 shrink-0">
       {links.map(({ href, icon: Icon, label }) => {
         const active = pathname.startsWith(href);
         return (
@@ -25,7 +25,7 @@ export function Sidebar() {
             key={label}
             href={href}
             title={label}
-            className={`p-2 rounded-lg transition-colors cursor-pointer ${active ? 'text-[#0D4897] bg-blue-50' : 'text-gray-700 hover:bg-gray-100'}`}
+            className={`p-2 rounded-lg transition-colors cursor-pointer ${active ? 'text-primary bg-primary/10' : 'text-muted-foreground hover:bg-accent'}`}
           >
             <Icon size={16} />
           </Link>

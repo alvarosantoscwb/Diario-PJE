@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Sidebar } from '@/components/sidebar';
 import { Header } from '@/components/header';
 import { SidebarProvider } from '@/components/sidebar-context';
+import { ThemeProvider } from '@/components/theme-script';
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
@@ -15,14 +16,16 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   }, [router]);
 
   return (
-    <SidebarProvider>
-      <div className="flex flex-col h-screen bg-[#F4F6F9]">
-        <Header />
-        <div className="flex flex-1 overflow-hidden">
-          <Sidebar />
-          <main className="flex-1 overflow-y-auto p-4 md:p-6">{children}</main>
+    <ThemeProvider>
+      <SidebarProvider>
+        <div className="flex flex-col h-screen bg-background">
+          <Header />
+          <div className="flex flex-1 overflow-hidden">
+            <Sidebar />
+            <main className="flex-1 overflow-y-auto p-4 md:p-6">{children}</main>
+          </div>
         </div>
-      </div>
-    </SidebarProvider>
+      </SidebarProvider>
+    </ThemeProvider>
   );
 }

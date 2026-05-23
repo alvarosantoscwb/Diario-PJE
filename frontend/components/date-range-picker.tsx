@@ -73,23 +73,23 @@ export function DateRangePicker({ value, onChange }: Props) {
 			<button
 				type="button"
 				onClick={() => setOpen((v) => !v)}
-				className="flex items-center gap-2 border border-gray-200 rounded-lg px-3 py-2 text-sm hover:border-gray-300 transition focus:outline-none focus:ring-2 focus:ring-[#0D4897] focus:border-transparent whitespace-nowrap"
+				className="flex items-center gap-2 border border-input rounded-lg px-3 py-2 text-sm hover:border-border transition focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent whitespace-nowrap"
 			>
-				<CalendarDays size={14} className="text-gray-400 shrink-0" />
-				<span className={hasValue ? "text-gray-700" : "text-[#6D6D6E]"}>
+				<CalendarDays size={14} className="text-muted-foreground shrink-0" />
+				<span className={hasValue ? "text-foreground" : "text-muted-foreground"}>
 					{formatDisplay(value.from, value.to)}
 				</span>
 				{hasValue && (
 					<X
 						size={12}
-						className="text-gray-400 hover:text-gray-600 shrink-0"
+						className="text-muted-foreground hover:text-foreground shrink-0"
 						onClick={handleClear}
 					/>
 				)}
 			</button>
 
 			{open && (
-				<div className="absolute top-full mt-1 left-0 z-50 bg-white border border-gray-200 rounded-xl shadow-lg">
+				<div className="absolute top-full mt-1 left-0 z-50 bg-popover border border-border rounded-xl shadow-lg">
 					<Calendar
 						mode="range"
 						numberOfMonths={2}

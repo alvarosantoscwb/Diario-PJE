@@ -71,27 +71,27 @@ export default function ComunicacoesPage() {
   return (
     <div className="max-w-5xl mx-auto">
       {/* Cabeçalho */}
-      <div className="mb-6 border border-gray-300 p-6 rounded-xl rounded-[#D4D4D4]">
-        <h1 className="text-2xl font-bold text-[#262626] rounded ">Comunicações</h1>
-        <p className="text-sm text-[#262626] mt-1">
+      <div className="mb-6 border border-border p-6 rounded-xl">
+        <h1 className="text-2xl font-bold text-foreground">Comunicações</h1>
+        <p className="text-sm text-foreground mt-1">
           Acompanhe as comunicações processuais obtidas do Diário de Justiça Eletrônico Nacional,
           organizadas e salvas automaticamente para sua consulta.
         </p>
       </div>
 
       {/* Filtros */}
-      <div className="bg-white border border-gray-200 rounded-xl p-4 mb-6">
+      <div className="bg-card border border-border rounded-xl p-4 mb-6">
         <div className="flex flex-col md:flex-row gap-3">
           {/* Busca por processo */}
           <form onSubmit={handleSearch} className="flex-1">
             <div className="relative">
-              <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+              <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
               <input
                 type="text"
                 placeholder="Buscar por número do processo"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-9 pr-4 py-2 text-sm border border-gray-200 rounded-lg outline-none focus:ring-2 focus:ring-[#0D4897] focus:border-transparent transition"
+                className="w-full pl-9 pr-4 py-2 text-sm border border-input rounded-lg outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition bg-background text-foreground"
               />
             </div>
           </form>
@@ -100,7 +100,7 @@ export default function ComunicacoesPage() {
           <select
             value={tribunal}
             onChange={(e) => { setTribunal(e.target.value); setPage(1); }}
-            className="text-sm border border-gray-200 rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-[#0D4897] focus:border-transparent transition text-[#6D6D6E] min-w-[180px]"
+            className="text-sm border border-input rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition text-muted-foreground bg-background min-w-[180px]"
           >
             <option value="">Selecione um tribunal</option>
             {TRIBUNAIS.map((t) => (
@@ -121,23 +121,23 @@ export default function ComunicacoesPage() {
           ))}
         </div>
       ) : error ? (
-        <div className="text-center py-24">
-          <p className="text-red-500 text-sm">{error}</p>
+          <div className="text-center py-24">
+          <p className="text-destructive text-sm">{error}</p>
           <button
             onClick={() => fetchData(page)}
-            className="mt-3 text-sm text-[#0D4897] hover:underline"
+            className="mt-3 text-sm text-primary hover:underline"
           >
             Tentar novamente
           </button>
         </div>
       ) : communications.length === 0 ? (
         <div className="flex flex-col items-center justify-center gap-2">
-          <div className="w-14 h-14 rounded-2xl flex items-center justify-center" style={{ backgroundColor: '#E5E5E5' }}>
-            <Search size={24} style={{ color: '#262626' }} />
+          <div className="w-14 h-14 rounded-2xl flex items-center justify-center bg-muted">
+            <Search size={24} className="text-foreground" />
           </div>
           <div className="text-center">
-            <p className="text-sm font-medium text-[#262626]">Nenhuma comunicação encontrada</p>
-            <p className="text-sm text-[#6D6D6E] mt-1">Não encontramos resultados para os filtros<br />aplicados. Tente ajustar os critérios de busca.</p>
+            <p className="text-sm font-medium text-foreground">Nenhuma comunicação encontrada</p>
+            <p className="text-sm text-muted-foreground mt-1">Não encontramos resultados para os filtros<br />aplicados. Tente ajustar os critérios de busca.</p>
           </div>
         </div>
       ) : (
@@ -158,7 +158,7 @@ export default function ComunicacoesPage() {
               <button
                 onClick={() => setPage((p) => Math.max(1, p - 1))}
                 disabled={page === 1}
-                className="p-2 rounded-lg border border-gray-200 disabled:opacity-40 hover:bg-gray-50 transition"
+                className="p-2 rounded-lg border border-input disabled:opacity-40 hover:bg-accent transition"
               >
                 <ChevronLeft size={16} />
               </button>
@@ -170,8 +170,8 @@ export default function ComunicacoesPage() {
                     key={pageNum}
                     onClick={() => setPage(pageNum)}
                     className={`w-8 h-8 rounded-lg text-sm font-medium transition ${pageNum === page
-                      ? 'bg-[#0D4897] text-white'
-                      : 'border border-gray-200 hover:bg-gray-50 text-gray-600'
+                      ? 'bg-primary text-primary-foreground'
+                      : 'border border-input hover:bg-accent text-muted-foreground'
                       }`}
                   >
                     {pageNum}
@@ -182,7 +182,7 @@ export default function ComunicacoesPage() {
               <button
                 onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                 disabled={page === totalPages}
-                className="p-2 rounded-lg border border-gray-200 disabled:opacity-40 hover:bg-gray-50 transition"
+                className="p-2 rounded-lg border border-input disabled:opacity-40 hover:bg-accent transition"
               >
                 <ChevronRight size={16} />
               </button>

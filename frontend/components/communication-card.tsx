@@ -18,43 +18,43 @@ function Field({ icon: Icon, label, value }: { icon: React.ElementType; label: s
   return (
     <div className="flex flex-col gap-0.5">
       <div className="flex items-center gap-2">
-        <Icon size={14} className="text-gray-400 shrink-0" />
-        <span className="text-xs text-gray-400">{label}</span>
+        <Icon size={14} className="text-muted-foreground shrink-0" />
+        <span className="text-xs text-muted-foreground">{label}</span>
       </div>
-      <span className="text-sm text-gray-800">{value}</span>
+      <span className="text-sm text-foreground">{value}</span>
     </div>
   );
 }
 
 export function CommunicationCardSkeleton() {
   return (
-    <div className="bg-white border border-dashed border-gray-300 rounded-xl p-6 animate-pulse">
+    <div className="bg-card border border-dashed border-border rounded-xl p-6 animate-pulse">
       <div className="flex flex-col gap-2">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
           {Array.from({ length: 4 }).map((_, i) => (
             <div key={i} className="flex flex-col gap-0.5">
               <div className="flex items-center gap-2">
-                <div className="w-3.5 h-3.5 bg-gray-200 rounded shrink-0" />
-                <div className="h-3 w-20 bg-gray-200 rounded" />
+                <div className="w-3.5 h-3.5 bg-muted rounded shrink-0" />
+                <div className="h-3 w-20 bg-muted rounded" />
               </div>
-              <div className="h-4 w-36 bg-gray-200 rounded" />
+              <div className="h-4 w-36 bg-muted rounded" />
             </div>
           ))}
         </div>
         <div className="flex flex-col gap-0.5">
           <div className="flex items-center gap-2">
-            <div className="w-3.5 h-3.5 bg-gray-200 rounded shrink-0" />
-            <div className="h-3 w-20 bg-gray-200 rounded" />
+            <div className="w-3.5 h-3.5 bg-muted rounded shrink-0" />
+            <div className="h-3 w-20 bg-muted rounded" />
           </div>
-          <div className="h-4 w-48 bg-gray-200 rounded" />
+          <div className="h-4 w-48 bg-muted rounded" />
         </div>
         <div className="flex flex-col gap-0.5">
           <div className="flex items-center gap-2">
-            <div className="w-3.5 h-3.5 bg-gray-200 rounded shrink-0" />
-            <div className="h-3 w-16 bg-gray-200 rounded" />
+            <div className="w-3.5 h-3.5 bg-muted rounded shrink-0" />
+            <div className="h-3 w-16 bg-muted rounded" />
           </div>
-          <div className="h-4 w-full bg-gray-200 rounded" />
-          <div className="h-4 w-3/4 bg-gray-200 rounded" />
+          <div className="h-4 w-full bg-muted rounded" />
+          <div className="h-4 w-3/4 bg-muted rounded" />
         </div>
       </div>
     </div>
@@ -70,7 +70,7 @@ export function CommunicationCard({ communication, onClick }: Props) {
   return (
     <div
       onClick={onClick}
-      className="bg-white border border-dashed border-gray-300 rounded-xl p-6 cursor-pointer hover:border-[#0D4897] hover:shadow-sm transition-all"
+      className="bg-card border border-dashed border-border rounded-xl p-6 cursor-pointer hover:border-primary hover:shadow-sm transition-all"
     >
       <div className="flex flex-col gap-2">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2 ">
@@ -82,10 +82,10 @@ export function CommunicationCard({ communication, onClick }: Props) {
         <Field icon={UsersRound} label="Destinatários" value={recipientNames(communication)} />
         <div className="flex flex-col gap-0.5">
           <div className="flex items-center gap-2">
-            <FileText size={14} className="text-[#6D6D6E] shrink-0" />
-            <span className="text-xs text-gray-400">Conteúdo</span>
+            <FileText size={14} className="text-muted-foreground shrink-0" />
+            <span className="text-xs text-muted-foreground">Conteúdo</span>
           </div>
-          <span className="text-sm text-gray-800 line-clamp-2">{communication.content}</span>
+          <span className="text-sm text-foreground line-clamp-2">{communication.content}</span>
         </div>
       </div>
     </div>

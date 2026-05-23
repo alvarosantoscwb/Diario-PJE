@@ -27,10 +27,10 @@ function HighlightedText({ text }: { text: string }) {
   const parts = text.split(regex);
 
   return (
-    <p className="text-sm text-gray-800 whitespace-pre-wrap leading-relaxed">
+    <p className="text-sm text-foreground whitespace-pre-wrap leading-relaxed">
       {parts.map((part, i) =>
         part.toLowerCase() === term ? (
-          <mark key={i} className="bg-yellow-200 text-yellow-900 rounded px-0.5">{part}</mark>
+          <mark key={i} className="bg-yellow-200 text-yellow-900 dark:bg-yellow-900 dark:text-yellow-200 rounded px-0.5">{part}</mark>
         ) : (
           part
         )
@@ -52,32 +52,32 @@ function SummaryDialog({ summary, loading, error, onClose, onRetry }: {
       onClick={onClose}
     >
       <div
-        className="bg-white rounded-xl shadow-xl w-full max-w-lg"
+        className="bg-card rounded-xl shadow-xl w-full max-w-lg"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center justify-between p-5 border-b border-gray-100">
+        <div className="flex items-center justify-between p-5 border-b border-border">
           <div className="flex items-center gap-2">
-            <Sparkles size={16} className="text-[#0D4897]" />
-            <h2 className="text-base font-semibold text-[#262626]">Resumo com IA</h2>
+            <Sparkles size={16} className="text-primary" />
+            <h2 className="text-base font-semibold text-foreground">Resumo com IA</h2>
           </div>
-          <button onClick={onClose} className="text-gray-400 hover:text-gray-600 transition cursor-pointer">
+          <button onClick={onClose} className="text-muted-foreground hover:text-foreground transition cursor-pointer">
             <X size={18} />
           </button>
         </div>
         <div className="p-5">
           {loading ? (
             <div className="flex items-center justify-center py-8">
-              <Loader2 size={24} className="animate-spin text-[#0D4897]" />
+              <Loader2 size={24} className="animate-spin text-primary" />
             </div>
           ) : error ? (
             <div className="flex flex-col gap-2">
-              <p className="text-sm text-red-500">{error}</p>
-              <button onClick={onRetry} className="text-sm text-[#0D4897] hover:underline self-start cursor-pointer">
+              <p className="text-sm text-destructive">{error}</p>
+              <button onClick={onRetry} className="text-sm text-primary hover:underline self-start cursor-pointer">
                 Tentar novamente
               </button>
             </div>
           ) : summary ? (
-            <p className="text-sm text-gray-700 whitespace-pre-wrap leading-relaxed">{summary}</p>
+            <p className="text-sm text-foreground whitespace-pre-wrap leading-relaxed">{summary}</p>
           ) : null}
         </div>
       </div>
@@ -111,12 +111,11 @@ function CommunicationDetail({ communication }: { communication: Communication }
 
   return (
     <>
-      <div className="bg-white border border-dashed border-gray-300 rounded-xl p-6">
-        {/* Mobile: botão acima | Desktop: botão à direita */}
+      <div className="bg-card border border-dashed border-border rounded-xl p-6">
         <div className="flex sm:hidden justify-start mb-3">
           <button
             onClick={handleResumirClick}
-            className="flex items-center gap-1.5 text-sm text-[#0D4897] border border-[#0D4897] px-3 py-1 rounded-lg hover:bg-[#0D4897]/5 transition cursor-pointer"
+            className="flex items-center gap-1.5 text-sm text-primary border border-primary px-3 py-1 rounded-lg hover:bg-primary/5 transition cursor-pointer"
           >
             <Sparkles size={13} />
             Resumir
@@ -126,24 +125,24 @@ function CommunicationDetail({ communication }: { communication: Communication }
           <div className="flex flex-col gap-3 flex-1">
             <div className="flex flex-col gap-0.5">
               <div className="flex items-center gap-1.5">
-                <Calendar size={13} className="text-gray-400 shrink-0" />
-                <span className="text-xs text-gray-400">Data</span>
+                <Calendar size={13} className="text-muted-foreground shrink-0" />
+                <span className="text-xs text-muted-foreground">Data</span>
               </div>
-              <span className="text-sm text-gray-800">{formatDate(communication.availableAt)}</span>
+              <span className="text-sm text-foreground">{formatDate(communication.availableAt)}</span>
             </div>
 
             <div className="flex flex-col gap-0.5">
               <div className="flex items-center gap-1.5">
-                <Users size={13} className="text-gray-400 shrink-0" />
-                <span className="text-xs text-gray-400">Destinatários</span>
+                <Users size={13} className="text-muted-foreground shrink-0" />
+                <span className="text-xs text-muted-foreground">Destinatários</span>
               </div>
-              <span className="text-sm text-gray-800">{recipientNames(communication)}</span>
+              <span className="text-sm text-foreground">{recipientNames(communication)}</span>
             </div>
 
             <div className="flex flex-col gap-0.5">
               <div className="flex items-center gap-1.5">
-                <FileText size={13} className="text-gray-400 shrink-0" />
-                <span className="text-xs text-gray-400">Conteúdo da movimentação</span>
+                <FileText size={13} className="text-muted-foreground shrink-0" />
+                <span className="text-xs text-muted-foreground">Conteúdo da movimentação</span>
               </div>
               <HighlightedText text={communication.content} />
             </div>
@@ -151,7 +150,7 @@ function CommunicationDetail({ communication }: { communication: Communication }
 
           <button
             onClick={handleResumirClick}
-            className="hidden sm:flex items-center gap-1.5 text-sm text-[#0D4897] border border-[#0D4897] px-3 py-1 rounded-lg hover:bg-[#0D4897]/5 transition cursor-pointer shrink-0"
+            className="hidden sm:flex items-center gap-1.5 text-sm text-primary border border-primary px-3 py-1 rounded-lg hover:bg-primary/5 transition cursor-pointer shrink-0"
           >
             <Sparkles size={13} />
             Resumir
@@ -205,56 +204,55 @@ export default function ProcessDetailPage() {
       <nav className="flex items-center gap-1.5 text-sm mb-6">
         <button
           onClick={() => router.back()}
-          className="text-gray-400 hover:text-gray-600 transition cursor-pointer"
+          className="text-muted-foreground hover:text-foreground transition cursor-pointer"
         >
           Diário Oficial
         </button>
-        <ChevronRight size={14} className="text-gray-400" />
-        <span className="text-[#262626] font-medium">Detalhes do processo</span>
+        <ChevronRight size={14} className="text-muted-foreground" />
+        <span className="text-foreground font-medium">Detalhes do processo</span>
       </nav>
 
       {loading ? (
         <div className="flex items-center justify-center py-24">
-          <Loader2 size={32} className="animate-spin text-[#0D4897]" />
+          <Loader2 size={32} className="animate-spin text-primary" />
         </div>
       ) : error ? (
         <div className="text-center py-24">
-          <p className="text-red-500 text-sm">{error}</p>
+          <p className="text-destructive text-sm">{error}</p>
         </div>
       ) : details ? (
         <div className="flex flex-col gap-4">
-          {/* Header do processo */}
-          <div className="border border-gray-300 p-6 rounded-xl">
+          <div className="border border-border p-6 rounded-xl">
             <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
-              <h1 className="text-xl font-bold text-[#262626]">
+              <h1 className="text-xl font-bold text-foreground">
                 {[
                   details.communications[0]?.processNumberMask || details.processNumber,
                   details.communications[0]?.className,
                 ].filter(Boolean).join(' - ')}
               </h1>
               {details.hasTransitadoEmJulgado && (
-                <span className="flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded-full self-start shrink-0" style={{ backgroundColor: '#FEF2EC', color: '#9D231C' }}>
+                <span className="flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded-full self-start shrink-0 bg-destructive/10 text-destructive">
                   <AlertCircle size={13} />
                   Transitou em julgado
                 </span>
               )}
             </div>
 
-            <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-2 sm:gap-4 mt-3 text-sm text-[#262626]">
+            <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-2 sm:gap-4 mt-3 text-sm text-foreground">
               {details.courtAcronym && (
                 <span className="flex items-center gap-1.5">
-                  <Scale size={13} className="text-[#6D6D6E]" />
+                  <Scale size={13} className="text-muted-foreground" />
                   {details.courtAcronym}
                 </span>
               )}
               {allRecipients && (
                 <span className="flex items-center gap-1.5">
-                  <Users size={13} className="text-[#6D6D6E]" />
+                  <Users size={13} className="text-muted-foreground" />
                   {allRecipients}
                 </span>
               )}
               <span className="flex items-center gap-1.5">
-                <Clock size={13} className="text-gray-400" />
+                <Clock size={13} className="text-muted-foreground" />
                 {details.communications.length} {details.communications.length === 1 ? 'atualização' : 'atualizações'}
               </span>
             </div>
@@ -272,7 +270,7 @@ export default function ProcessDetailPage() {
               <button
                 onClick={() => setPage((p) => Math.max(1, p - 1))}
                 disabled={page === 1}
-                className="flex items-center gap-1 text-sm text-[#262626] transition cursor-pointer"
+                className="flex items-center gap-1 text-sm text-foreground transition cursor-pointer"
               >
                 <ChevronRight size={14} className="rotate-180" />
                 Anterior
@@ -282,7 +280,7 @@ export default function ProcessDetailPage() {
                 <button
                   key={p}
                   onClick={() => setPage(p)}
-                  className={`w-8 h-8 rounded-lg text-sm text-[#262626] transition cursor-pointer hover:bg-gray-50 ${p === page ? 'border border-[#D4D4D4]' : ''}`}
+                  className={`w-8 h-8 rounded-lg text-sm text-foreground transition cursor-pointer hover:bg-accent ${p === page ? 'border border-border' : ''}`}
                 >
                   {p}
                 </button>
@@ -291,7 +289,7 @@ export default function ProcessDetailPage() {
               <button
                 onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                 disabled={page === totalPages}
-                className="flex items-center gap-1 text-sm text-[#262626] transition cursor-pointer"
+                className="flex items-center gap-1 text-sm text-foreground transition cursor-pointer"
               >
                 Próximo
                 <ChevronRight size={14} />
