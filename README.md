@@ -57,9 +57,9 @@ Acesse em **http://localhost:3000**
 
 | Serviço | URL |
 |---|---|
-| **Frontend** | https://frontend-pje.vercel.app |
-| **Backend** | https://diario-pje-production-2617.up.railway.app | 
-| **Swagger (API Docs)** | https://diario-pje-production-2617.up.railway.app/api/docs |
+| **Frontend** | https://diario-pje.vercel.app |
+| **Backend** | https://diario-pje-production.up.railway.app | 
+| **Swagger (API Docs)** | https://diario-pje-production.up.railway.app/api/docs |
 
 > **Infraestrutura:** Frontend na Vercel, Backend + PostgreSQL no Railway (rede interna privada)
 
