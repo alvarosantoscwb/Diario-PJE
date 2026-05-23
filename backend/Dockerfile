@@ -17,4 +17,4 @@ COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/prisma ./prisma
 COPY package*.json ./
 EXPOSE 3001
-CMD ["sh", "-c", "npx prisma migrate deploy && (npm run seed || echo 'Seed skipped/failed') && node dist/main.js"]
+CMD ["sh", "-c", "npx prisma db push && (npm run seed || echo 'Seed skipped/failed') && node dist/main.js"]
